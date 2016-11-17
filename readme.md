@@ -32,10 +32,10 @@ We hereby go through all the files.
 ### Dockerfile
 
 #### Step 1 : Load pre-existing image
-Tells Docker which image your image is based on with the "FROM" keyword. In our case, we'll use the Bigboards base image bigboards/base-__arch__ as the foundation to build our app. 
+Tells Docker which image your image is based on with the "FROM" keyword. In our case, we'll use the Bigboards base image bigboards/java-8-x86_64 as the foundation to build our app. 
 
 ```sh
-FROM bigboards/base-__arch__
+FROM bigboards/java-8-x86_64
 ```
 
 
