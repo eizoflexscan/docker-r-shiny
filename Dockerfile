@@ -1,4 +1,3 @@
-#FROM bigboards/java-8-__arch__
 FROM bigboards/java-8-x86_64
 
 MAINTAINER BigBoards <hello@bigboards.io>
@@ -14,7 +13,7 @@ RUN codename=$(lsb_release -c -s) && \
 	apt-get update && apt-get install -y r-base r-base-dev
 
 # install R libraries
-RUN R -e 'install.packages(c("devtools","shiny"), repos="http://cran.freestatistics.org/", dependencies=NA,clean=TRUE)'  && \
+RUN R -e 'install.packages(c('devtools','shiny',  'rmarkdown', 'SparkR'), repos="http://cran.freestatistics.org/", dependencies=NA,clean=TRUE)'  && \
 	R -e 'library("devtools"); install_github("mbojan/alluvial")' && \
 	R -e 'update.packages(ask=FALSE,repos="http://cran.freestatistics.org/")'
 		
