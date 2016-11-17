@@ -109,7 +109,7 @@ ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ```
 
-#### Install shiny proxy with demo shiny application
+#### Step 7: Install shiny proxy with demo shiny application
 from https://github.com/openanalytics/shinyproxy-demo/blob/master/Dockerfile 
 
 ```sh
@@ -123,7 +123,7 @@ RUN rm /root/shinyproxy_0.0.1.tar.gz
 * Remove the folder containing the library (line 3).
 
 
-#### Step 9: Reduce image size  
+#### Step 8: Reduce image size  
 Remove the R package list to reduce image size. This is done as the last thing of the build process, instead within step 4,  as installs can fail due to this!
 
 ```
@@ -131,22 +131,22 @@ RUN apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ```
 
-#### Step 10: Add shell script with startup commands
-Add a script to start RStudio Server. 
+#### Step 9: Set host and port
 ```sh
-ADD run.sh /init/run.sh
+COPY Rprofile.site /usr/lib/R/etc/
 ```
 
-#### Step 11:Expose the RStudio Server port
-Associate the 8787 specified port to enable networking between the running process inside the container and the outside world (i.e. the host).
+#### Step 10:Expose the Shiny proxy port
+Associate the 3838 specified port to enable networking between the running process inside the container and the outside world (i.e. the host).
 ```
-EXPOSE 8787
+EXPOSE 3838
 ```
 
-####  Step 12: Start RStudio Server 
-The command CMD, similarly to RUN, can be used for executing a specific command. However, unlike RUN it is not executed during build, but when a container is instantiated using the image being built. Therefore, it should be considered as an initial, default command that gets executed (i.e. run) with the creation of containers based on the image to start RStudio Server.
+
+####  Step 11: Start Shiny app
+The command CMD, similarly to RUN, can be used for executing a specific command. However, unlike RUN it is not executed during build, but when a container is instantiated using the image being built. Therefore, it should be considered as an initial, default command that gets executed (i.e. run) with the creation of containers based on the image to start the Shiny app.
 ```sh
-CMD ["./init/run.sh"]
+CMD ["R", "-e shinyproxy::run_01_hello()"]
 ```
 
 
