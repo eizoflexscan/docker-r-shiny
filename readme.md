@@ -137,7 +137,7 @@ COPY Rprofile.site /usr/lib/R/etc/
 ```
 
 #### Step 10:Expose the Shiny proxy port
-Associate the 3838 specified port to enable networking between the running process inside the container and the outside world (i.e. the host).
+Associate the 3838 specified port to enable networking between the running process inside the container and the outside world (i.e. the host). Less than 10 seconds later, you can point your browser to http://localhost:8080 and use your Shiny apps! To be corrected....!!!!
 ```
 EXPOSE 3838
 ```
@@ -149,10 +149,8 @@ CMD ["R", "-e shinyproxy::run_01_hello()"]
 ```
 
 
-### Configuration file
-
-#### Rprofile.site
-Set Host and Port + to be completed...
+### Rprofile.site
+This configuration file sets Host and Port + to be completed...
 ```
 local({
    old <- getOption("defaultPackages")
@@ -161,12 +159,5 @@ local({
 ```
 
 
-Running ShinyProxy
 
-ShinyProxy can be run using the following command
-
-java -jar shinyproxy-0.7.0.jar  
-less than 10 seconds later, you can point your browser to http://localhost:8080 and use your Shiny apps!
-
-More advanced
 
