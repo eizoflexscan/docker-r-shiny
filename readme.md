@@ -142,7 +142,6 @@ Associate the 3838 specified port to enable networking between the running proce
 EXPOSE 3838
 ```
 
-
 ####  Step 11: Start Shiny app
 The command CMD, similarly to RUN, can be used for executing a specific command. However, unlike RUN it is not executed during build, but when a container is instantiated using the image being built. Therefore, it should be considered as an initial, default command that gets executed (i.e. run) with the creation of containers based on the image to start the Shiny app.
 ```sh
@@ -151,6 +150,17 @@ CMD ["R", "-e shinyproxy::run_01_hello()"]
 
 
 ### Configuration file
+
+#### Rprofile.site
+Set Host and Port + to be completed...
+```
+local({
+   old <- getOption("defaultPackages")
+   options(defaultPackages = c(old, "shinyproxy"), shiny.port = 3838, shiny.host = "0.0.0.0")
+})
+```
+
+
 Running ShinyProxy
 
 ShinyProxy can be run using the following command
