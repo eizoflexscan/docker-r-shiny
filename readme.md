@@ -97,17 +97,7 @@ RUN R -e 'install.packages(c('devtools','shiny',  'rmarkdown', 'SparkR'), repos=
 * Avoid to ask if packages required to be updated (line 3).
 
 
-#### Step 6: Download and install RStudio Server Open Source edition
-A full description of Rstudio installation processes can be found at the following [link](https://cran.rstudio.com/bin/linux/ubuntu/README.html). Instead of using the default value for usernames and passwords, they will be defined later on in the configuration file `build_logins.sh`.
-
-```
-RUN wget -O /tmp/rstudio.deb http://download2.rstudio.org/rstudio-server-0.99.902-amd64.deb && \
-    gdebi -n /tmp/rstudio.deb && \
-    rm /tmp/rstudio.deb
-```    
-
-
-#### Step 7: Configure default locale
+#### Step 6: Configure default locale
 It might be interesting to avoid confusion to configure default local, see [comments](https://github.com/rocker-org/rocker/issues/19).
 
 ```sh
@@ -119,19 +109,19 @@ ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ```
 
-
-#### Step 8: Define users and passwords for RStudio
-The ADD command gets two arguments: a source and a destination. It basically copies the configuration file `build_logins.sh` from the source on the host into the container's own filesystem at the set destination to specify users and passwords. 
-
-Note that the sleep is only added because older versions of docker have an issue with chmod.
+#### Install shiny proxy with demo shiny application
+from https://github.com/openanalytics/shinyproxy-demo/blob/master/Dockerfile 
 
 ```sh
-ADD build_logins.sh /tmp/build_logins.sh
-RUN chmod +x /tmp/build_logins.sh && \
-	sleep 1 && \
- 	./tmp/build_logins.sh 4 && \
- 	rm /tmp/build_logins.sh
+COPY shinyproxy_0.0.1.tar.gz /root/
+RUN R CMD INSTALL /root/shinyproxy_0.0.1.tar.gz
+RUN rm /root/shinyproxy_0.0.1.tar.gz
 ```
+
+* Copy the folder including ShinyProxy library (line 1),
+* Install ShinyProxy library (line 2),
+* Remove the folder containing the library (line 3).
+
 
 #### Step 9: Reduce image size  
 Remove the R package list to reduce image size. This is done as the last thing of the build process, instead within step 4,  as installs can fail due to this!
