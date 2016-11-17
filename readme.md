@@ -18,8 +18,24 @@ Note that this image can be combined with Hadoop, Spark and Rstudio to get a ful
 
 
 ## Files Description 
+ShinyProxy uses one or more Docker images to serve the Shiny apps to end users. If you want to deploy your Shiny apps, you will therefore need to build your own Docker image for the app.
+
+Such a Docker image will typically contain:
+
+* an R installation,
+* all R packages the Shiny app depends on ('dependencies'),
+* a folder which contains the shiny app files  (ui.R, server.R and others).
 
 ### Dockerfile
 
 
+### Configuration file
+Running ShinyProxy
+
+ShinyProxy can be run using the following command
+
+java -jar shinyproxy-0.7.0.jar  
+less than 10 seconds later, you can point your browser to http://localhost:8080 and use your Shiny apps!
+
+More advanced
 
