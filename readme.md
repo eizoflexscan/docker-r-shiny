@@ -160,10 +160,55 @@ local({
 ### shinyproxy_0.0.1.tar.gz
 It contains the ShinyProxy library source code.
 
-### Dockerfile
 
+### Configuration
+The server configuration is mainly done in a file named 'application.yml'. I truly advice to refer to this [documentation](http://www.shinyproxy.io/configuration/). All options are well described....
+
+Hereby, you will find the most simple version of the configuration
+
+```
+shiny:
+  proxy:
+    title: Open Analytics Shiny Proxy
+    logo-url: http://www.openanalytics.eu/sites/www.openanalytics.eu/themes/oa/logo.png
+    landing-page: /
+    heartbeat-rate: 10000
+    heartbeat-timeout: 60000
+    port: 8080
+    authentication: simple
+    admin-groups: scientists
+    # Simple auth configuration
+    users:
+    - name: jack
+      password: password
+      groups: scientists
+    - name: jeff
+      password: password
+      groups: mathematicians
+    # Docker configuration
+    docker:
+      cert-path: /home/none
+      url: http://localhost:2375
+      host: 127.0.0.1
+      port-range-start: 20000
+  apps:
+  - name: MyApp1
+    display-name: Hello Application
+    description: Application which demonstrates the basics of a Shiny app
+    docker-cmd: ["R", "-e shinyproxy::run_MyApp1()"]
+    docker-image: eizoflexscan/?????????
+    groups: scientists, mathematicians
+  - name: MyApp2
+    docker-cmd: ["R", "-e shinyproxy::run_MyApp2()"]
+    docker-image: openanalytics/shinyproxy-demo
+    groups: scientists
+
+logging:
+  file:
+    shinyproxy.log
+```
 
 
 # Credit
 
-All credit goes to Open Analytics! This repository is nothing more than a summary of their documentation.
+All credit goes to Open Analytics! This repository is nothing more than a summary of their excellent documentation.
