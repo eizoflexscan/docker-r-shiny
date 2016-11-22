@@ -27,7 +27,6 @@ Such a Docker image will typically contain:
 
 We hereby go through all the files. 
 
-### Dockerfile
 
 ### Dockerfile
 
@@ -161,8 +160,8 @@ local({
 ### shinyproxy_0.0.1.tar.gz
 It contains the ShinyProxy library source code.
 
-### Folder Shinyproxy
-Only R dfdfdf
+### Dockerfile
+
 
 
 # Credit
