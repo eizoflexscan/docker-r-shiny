@@ -148,19 +148,6 @@ CMD ["R", "-e shinyproxy::run_01_hello()"]
 ```
 
 
-### Rprofile.site
-This configuration file sets Host and Port + to be completed...
-```
-local({
-   old <- getOption("defaultPackages")
-   options(defaultPackages = c(old, "shinyproxy"), shiny.port = 3838, shiny.host = "0.0.0.0")
-})
-```
-
-### shinyproxy_0.0.1.tar.gz
-It contains the ShinyProxy library source code.
-
-
 ### Configuration
 The server configuration is mainly done in a file named 'application.yml'. I truly advice to refer to this [documentation](http://www.shinyproxy.io/configuration/). All options are well described....
 
@@ -207,6 +194,18 @@ logging:
   file:
     shinyproxy.log
 ```
+
+### Rprofile.site
+This configuration file sets Host and Port + to be completed...
+```
+local({
+   old <- getOption("defaultPackages")
+   options(defaultPackages = c(old, "shinyproxy"), shiny.port = 3838, shiny.host = "0.0.0.0")
+})
+```
+
+### shinyproxy_0.0.1.tar.gz
+It contains the ShinyProxy source codes.
 
 
 # Credit
