@@ -165,4 +165,6 @@ It contains the ShinyProxy library source code.
 Only R dfdfdf
 
 
+# Credit
 
+All credit goes to Open Analytics! This repository is nothing more than a summary of their documentation.
